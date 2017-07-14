@@ -174,9 +174,9 @@ Let's suppose that the composer send the following state information to the chan
 
 ```json
 {
-  message: "hello world",
-  count: 0,
-  color: "black"
+  "message": "hello world",
+  "count": 0,
+  "color": "black"
 }
 ```
 
