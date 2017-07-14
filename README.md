@@ -4,13 +4,13 @@
 
 To create your own Channels card:
 
-* Install tools:  
-```
+* Install tools:
+```text
 npm install -g bower polymer-cli channels-cli
 ```
 * Create a GitHub repository (lowercase with hyphens such as **`janes-simple-card`**) and clone it locally
-* From the root of your new project, scaffold your card:  
-```
+* From the root of your new project, scaffold your card:
+```text
 channels init
 ```
 * Edit your components file (such as **`janes-simple-card.html`**)
@@ -38,13 +38,13 @@ You will also need to have a [GitHub](https://github.com/) account and your favo
 
 Now you are ready to install the other dependencies.  (Note that you may need to use `sudo` on some machines.)
 
-```
+```text
 npm install -g bower polymer-cli channels-cli
 ```
 
 ### Step 2: Create a Repository
 
-Each Channels card is maintained in a separate GitHub repository. 
+Each Channels card is maintained in a separate GitHub repository.
 
 Go to github.com, sign in, and click "New Repository".  In the "Repository name", we recommend a globally unique name that will be the prefix of the web component tags you will create.  Tag names must be globally unique, so choose something distinctive.  You name should be lower-case containing at least one hyphen.  For example, 'sallys-first-card'.
 
@@ -60,7 +60,7 @@ We provide a command-line tool (installed as **channel-cli** above) to help you 
 
 Open a shell and **cd** to the root folder of your local copy of the git repository for your card.
 
-```
+```text
 channels init
 ```
 
@@ -78,25 +78,25 @@ In the world of web components, it is common to take advantage of other componen
 
 For example, suppose that you would like to use Polymer's paper-input web component in your composer.  You will add a bower dependency for it first:
 
-```
+```text
 bower install --save PolyerElements/paper-input
 ```
 
 Then you will add an import directive at the top of your card definition:
 
-```
+```html
 <link type="import" href="../paper-input/paper-input.html">
 ```
 
 Or suppose that you like to use JQuery.  You can add a dependency on that library:
 
-```
+```text
 bower install --save jquery
 ```
 
 And then you will add a script tag inside your component definition.  **Note:** Do not place script tags inside your **template** tag.  Place it just above or below the script tag containing your component code.
 
-```
+```html
 <script src="../jquery/dist/jquery.min.js"></script>
 ```
 
@@ -104,7 +104,7 @@ And then you will add a script tag inside your component definition.  **Note:** 
 
 In your component definitions file (such as `sallys-first-card.html`), you will see import directives at the top, followed by two web component definitions contained in `<dom-module>` tags.  The first is for your composer.  The second is for your viewer.  Let's look at your composer first.
 
-The definition contains a `<template>` tag and a `<script>` tag.  
+The definition contains a `<template>` tag and a `<script>` tag.
 
 The template is the HTML markup determining how the component appears in the webpage.  The script determines how it will behave.  The scaffolding created a composer that just contains a "Send" button (using a Polymer paper-button component to make it look pretty -- you could use a `<button>` tag if you prefer).  You can add any additional markup you want to determine how your composer looks and how it works.
 
@@ -128,7 +128,7 @@ In the scaffolded version of your viewer, you will see that the template just co
 
 Polymer enables "data binding" to make it easy to use information stored in a property within your markup so that you don't have to write extra code to manipulate the DOM elements in your markup.  For example, suppose that the composer sends a message, `this.send({ message: "hello world" });`.  The viewer can then expect that there is a `data.message` string in its properties.  It could display that message in the viewer with markup that looks like:
 
-```
+```html
 <div>{{data.message}}</div>
 ```
 
@@ -272,6 +272,6 @@ As a side note, you'll notice that the **by** field of the new item is populated
 
 The stateController also handles cases where cards may be sharing blocks of text that are editable by all participants concurrently.  Even this collaborative editing is supported.  The protocol uses a "diff" concept to send mutations based on changes to the text to other cards, and so can merge together changes to the same text by different users at the same time -- as long as those changes are not at the place in the text.  If there are conflicting changes, then the protocol resolves them using "best effort".
 
-To use shared text, one has to be careful with data binding and updates.  When changing a text property, the viewer should call, for example, `this.updateText('mytext', updatedFullText)`.  The stateController will compare `updatedFullText` with the value currently in `this.data.mytext` and will send a mutation based on the difference.  For this reason, it is important that if using a text input control in the UI, it not be data-bound to the same text, or things won't work correctly.  
+To use shared text, one has to be careful with data binding and updates.  When changing a text property, the viewer should call, for example, `this.updateText('mytext', updatedFullText)`.  The stateController will compare `updatedFullText` with the value currently in `this.data.mytext` and will send a mutation based on the difference.  For this reason, it is important that if using a text input control in the UI, it not be data-bound to the same text, or things won't work correctly.
 
 Instead, the textbox can be initialized based on the value in, for example, `this.data.mytext` and then the viewer should implement a method called `updateText(path, newValue, updater)`.  The path, in this example will be 'mytext', and the newValue will be what has been set (either locally or remotely).  If the user is maintaining a cursor/caret while editing, the updater is a function that accepts an offset into the text where the caret is currently, and will return a new offset where it should be moved following this change.  This method on the viewer will be called anytime a change is made to the text -- locally or remotely.
