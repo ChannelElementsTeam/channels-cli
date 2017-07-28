@@ -8,7 +8,7 @@ const inquirer = require('inquirer');
 const path = require('path');
 const { execSync } = require('child_process');
 
-program.version("0.0.1").parse(process.argv);
+program.version("0.1.0").parse(process.argv);
 
 const cardName = path.basename(process.cwd());
 
@@ -63,7 +63,7 @@ inquirer.prompt(questions).then((answers) => {
     "dependencies": {
       "polymer": "Polymer/polymer#^2.0.0",
       "paper-button": "PolymerElements/paper-button#^2.0.0",
-      "polymer-channels-card": "*"
+      "polymer-channels-card": "^0.1.2"
     },
     "devDependencies": {
       "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",
@@ -85,36 +85,28 @@ inquirer.prompt(questions).then((answers) => {
   fs.writeFileSync('.gitignore', "bower_components\n");
   const demoIndexContent = `<!doctype html>
   <html lang="en">
-    <head>
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
-      <title>card-sample-shared-toggle demo</title>
-      <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-      <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
-      <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
-      <link rel="import" href="../card-sample-shared-toggle.html">
-      <custom-style>
-        <style is="custom-style" include="demo-pages-shared-styles">
-        </style>
-      </custom-style>
-    </head>
-    <body>
-        <div class="vertical-section-container centered">
-          <h3>Basic ${cardName} demo</h3>
-          <demo-snippet>
-            <template>
-              <div style="width:400px;border:1px solid #ccc;margin:25px 0;padding:5px;">
-                <${cardName}-composer></${cardName}-composer>
-              </div>
-              <div style="width:400px;border:1px solid #ccc;margin:25px 0;padding:5px;">
-                <${cardName}-viewer></${cardName}-viewer>
-              </div>
-            </template>
-          </demo-snippet>
-        </div>
-      </body>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+    <title>${cardName} demo</title>
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="../../polymer-channels-card/channels-card-demo-helper.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="../${cardName}.html">
+    <custom-style>
+      <style is="custom-style" include="demo-pages-shared-styles">
+      </style>
+    </custom-style>
+  </head>
+  <body>
+    <div class="vertical-section-container centered">
+      <h3>${cardName} demo</h3>
+      <channels-card-demo-helper composer-tag-name="${cardName}-composer" viewer-tag-name="${cardName}-viewer"></channels-card-demo-helper>
+    </div>
+  </body>
+
   </html>
-`
+`;
   if (!fs.existsSync('demo')) {
     fs.mkdirSync('demo');
   }
