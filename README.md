@@ -14,13 +14,19 @@ npm install -g bower polymer-cli channels-cli
 channels init
 ```
 * Edit your components file (such as **`janes-simple-card.html`**)
+* Test your component by running a local server:
+```text
+polymer serve
+```
+* Then load a test page for your component by opening a browser using the URL returned after 'reusable components', such as **http://127.0.0.1:8000/components/test-component/janes-simple-card/**.
+* Iterate until the composer and viewer works and looks as you want it.
 * Commit and push to GitHub
+* Create a new GitHub release for your project
 * Open Channels client, create a channel, and load your card, such as **`JaneDoe/janes-simple-card`**
-* Each time you iterate, load the card again, forcing an update using **`JaneDoe/janes-simple-card#update`**
 
 ## Introduction
 
-[Channels](https://channelelements.com) is a new distributed open-source internet communication platform.  Like email, anyone is free to implement their own server and/or their own client.  Any client can interoperate with any server.  What makes Channels really exciting is that channels are populated with "cards" that are implemented using web components and anyone can create their own cards that will interoperate with any client and server.
+[Channels](https://channelelements.org) is a new distributed open-source internet communication platform.  Like email, anyone is free to implement their own server and/or their own client.  Any client can interoperate with any server.  What makes Channels really exciting is that channels are populated with "cards" that are implemented using web components and anyone can create their own cards that will interoperate with any client and server.
 
 ## Concepts
 
@@ -134,21 +140,29 @@ Polymer enables "data binding" to make it easy to use information stored in a pr
 
 Read more about data binding at [Polymer](https://www.polymer-project.org/2.0/docs/devguide/data-binding).
 
-### Step 7:  Commit your Changes
+### Step 7:  Test your Card
+
+You are able to test your card in a local test page separate from Channels.  To do this, you use Polymer's tools to serve up your files locally:
+
+```text
+polymer serve
+```
+
+This will start a new web server on your machine for serving up your files.  It will return two URLs.  Of these you will use the second one called 'reusable components', such as **http://127.0.0.1:8000/components/test-component/sallys-simple-card/**.
+
+Loading this URL in your browser will show you a test page that contains your card -- without running Channels itself.  The page acts as the Channels network.  You will first see your composer.  When you take the action that will send the card, the page will then show three viewers representing three separate conceptual users.
+
+You can now develop your composer and viewer iteratively until they work the way you want them to.  Each time you make a change to your card definition files, just refresh your browser.
+
+### Step 8:  Commit your Changes
 
 Once you are satisfied with your card, save all changes, commit them to your local repository, and push the changes to GitHub.
 
-### Step 8:  Load your Card
+### Step 9:  Load your Card
 
 Open a Channels client, create a new channel for testing, and at the bottom, click on the button to choose the composer.  Then click on the button to load a new card.  In the dialog enter the owner/repo name (such as **`JaneDoe/janes-simple-card`**) or the URL from GitHub (such as **`https://github.com/JaneDoe/janes-simple-card`**).  They are equivalent.
 
 Your composer should now show up at the bottom of the channel.  Use it and send a card into the channel.  Check out the viewer.  Open a second client and use a share code to view the same channel, so that you can see your viewer and test that it responds correctly to various events.
-
-### Step 9:  Iterate
-
-As you develop your card, you can make changes, commit them to GitHub, and then reload your card.
-
-To force the Channels client to reload your card, go to the composer chooser and enter your card location again (even if it is already in the list of available cards) and append **#update** to the end of the location.  For example, load **`JaneDoe/janes-simple-card#update`** to force it to update to your latest version.
 
 ### Step 10:  Release
 

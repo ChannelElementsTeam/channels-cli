@@ -8,7 +8,7 @@ const inquirer = require('inquirer');
 const path = require('path');
 const { execSync } = require('child_process');
 
-program.version("0.1.0").parse(process.argv);
+program.version("0.1.1").parse(process.argv);
 
 const cardName = path.basename(process.cwd());
 
