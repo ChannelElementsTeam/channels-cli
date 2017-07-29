@@ -85,7 +85,7 @@ In the world of web components, it is common to take advantage of other componen
 For example, suppose that you would like to use Polymer's paper-input web component in your composer.  You will add a bower dependency for it first:
 
 ```text
-bower install --save PolyerElements/paper-input
+bower install --save PolymerElements/paper-input
 ```
 
 Then you will add an import directive at the top of your card definition:
